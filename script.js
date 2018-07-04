@@ -1,3 +1,6 @@
+const patterns = [[0, 1, 2], [3, 4, 5], [6, 7, 8],   // horizontal
+                  [0, 3, 6], [1, 4, 7], [2, 5, 8],   // vertical
+                  [0, 4, 8], [2, 4, 6]]              // diagonal
 const createBoard = () => {
     let cells = [0,0,0,0,0,0,0,0,0]
     return {
@@ -44,6 +47,15 @@ const createGame = (p1, p2) => {
                 }
             }
             else console.log('This cell is taken.') 
+        },
+        checkWin: () => {
+            const currentBoard = getBoard()
+            let playerMarks = []
+            for(let i = 0; i < currentBoard.length; i++) {
+                if(currentBoard[i] == currentPlayer.id) {
+                    playerMarks.push(i)
+                } 
+            }
         }
     }
 }
@@ -59,7 +71,6 @@ const renderBoard = (cells) => {
         if(cells[i] == 0) cell.innerText = ''
         else if(cells[i] == 1) cell.innerText = 'X'
         else cell.innerText = 'O'
-        // cell.innerText = cells[i]
         boardDiv.appendChild(cell)
     }
 }
