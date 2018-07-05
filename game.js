@@ -34,12 +34,34 @@ const createPlayer = playerBuilder()
 
 const createGame = (p1, p2) => {
     const board = createBoard()
+    let winnerId = 0
     let currentPlayer = p1
+    const switchPlayer = () => {
+        if(currentPlayer == p1) currentPlayer = p2
+        else currentPlayer = p1
+    }
+    const checkWin = () => {
+        const currentBoard = board.cells()
+        let hasWinningPattern = false
+        let playerMarks = []
+        for(let i = 0; i < currentBoard.length; i++) {
+            if(currentBoard[i] == currentPlayer.id) {
+                playerMarks.push(i)
+            } 
+        }
+        console.log(`player marks: ${playerMarks}`)
+        if(playerMarks.length >= 3) {
+            patterns.forEach(pattern => {
+                if(pattern.every(cell => playerMarks.indexOf(cell)) != -1) {
+                    hasWinningPattern = true
+                }
+            })
+        }
+        return hasWinningPattern
+    }
     return {
-        switchPlayer: () => {
-            if(currentPlayer == p1) currentPlayer = p2
-            else currentPlayer = p1
-        },
+        getBoard: () => board.cells(),
+        getWinnerId: () => winnerId,
         turn: (position) => {
             if(board.isEmptyCell(position)) {
                 if(currentPlayer == p1) {
@@ -50,25 +72,19 @@ const createGame = (p1, p2) => {
                 }
             }
             else console.log('This cell is taken.') 
-        },
-        checkWin: () => {
-            const currentBoard = board.cells()
-            let hasWinningPattern = false
-            let playerMarks = []
-            for(let i = 0; i < currentBoard.length; i++) {
-                if(currentBoard[i] == currentPlayer.id) {
-                    playerMarks.push(i)
-                } 
+
+            if (checkWin()) {
+                if (currentPlayer == p1) {
+                    winnerId = 1
+                } else {
+                    winnerId = 2
+                }
+                console.log('We have a winner')
+                return true
+            } else {
+                switchPlayer()
+                return false
             }
-            console.log(`player marks: ${playerMarks}`)
-            if(playerMarks.length >= 3) {
-                patterns.forEach(pattern => {
-                    if(pattern.every(cell => playerMarks.indexOf(cell)) != -1) {
-                        hasWinningPattern = true
-                    }
-                })
-            }
-            return hasWinningPattern
         }
     }
 }
