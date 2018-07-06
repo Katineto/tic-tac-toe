@@ -57,6 +57,7 @@ export const createGame = (p1, p2) => {
             patterns.forEach(pattern => {
                 if(pattern.every(cell => playerMarks.indexOf(cell)) != -1) {
                     hasWinningPattern = true
+                    console.log('checkWin changed hasWinningPattern to true')
                 }
             })
         }

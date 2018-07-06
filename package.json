@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Katineto/tic-tac-toe/issues"
   },
-  "homepage": "https://github.com/Katineto/tic-tac-toe#readme"
+  "homepage": "https://github.com/Katineto/tic-tac-toe#readme",
+  "devDependencies": {
+   "babel-cli": "^6.0.0"
+  }
 }

@@ -1,5 +1,5 @@
-import { createPlayer, createGame } from './game';
-import { renderBoard, renderPlayers } from './view';
+import { createPlayer, createGame } from './game.mjs';
+import { renderBoard, renderPlayers } from './view.mjs';
 
 const player1Input = document.getElementById('player1')
 const player2Input = document.getElementById('player2')

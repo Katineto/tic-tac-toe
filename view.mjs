@@ -10,7 +10,6 @@ export const renderBoard = (game) => {
         //populate cells with symbols
         if(cells[i] == 0) {
             cell.innerText = ''
-            console.log('NOTHING HERE')
         }
         else if(cells[i] == 1) cell.innerText = 'X'
         else cell.innerText = 'O'
