@@ -2,7 +2,7 @@
 const patterns = [[0, 1, 2], [3, 4, 5], [6, 7, 8],   // horizontal
 [0, 3, 6], [1, 4, 7], [2, 5, 8],   // vertical
 [0, 4, 8], [2, 4, 6]]              // diagonal
-const createBoard = () => {
+export const createBoard = () => {
     let cells = [0,0,0,0,0,0,0,0,0]
     return {
         cells: () => cells.slice(0),
@@ -24,15 +24,18 @@ const playerBuilder = () => {
     let lastId = 0
     return (name) => {
         lastId += 1
+        let score = 0
         return {
             name,
-            id: lastId
+            id: lastId,
+            score,
+            addPoint: () => score += 1
         }
     }
 }
-const createPlayer = playerBuilder()
+export const createPlayer = playerBuilder()
 
-const createGame = (p1, p2) => {
+export const createGame = (p1, p2) => {
     const board = createBoard()
     let winnerId = 0
     let currentPlayer = p1
@@ -71,7 +74,7 @@ const createGame = (p1, p2) => {
                     board.mark2(position)
                 }
             }
-            else console.log('This cell is taken.') 
+            else return
 
             if (checkWin()) {
                 if (currentPlayer == p1) {
@@ -79,7 +82,7 @@ const createGame = (p1, p2) => {
                 } else {
                     winnerId = 2
                 }
-                console.log('We have a winner')
+                console.log(`We have a winner: ${currentPlayer.name}`)
                 return true
             } else {
                 switchPlayer()
@@ -87,10 +90,4 @@ const createGame = (p1, p2) => {
             }
         }
     }
-}
-
-module.exports = {
-    createBoard,
-    createGame,
-    createPlayer
 }

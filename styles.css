@@ -5,6 +5,11 @@
     grid-template-columns: repeat(3, 1fr)
 }
 #board *{
-border: 1px solid black;
-height: 200px;
+    border: 1px solid black;
+    height: 200px;
+    text-align: center;
+    font-size: 4rem;
+}
+#board *:hover{
+    cursor: pointer;
 }
