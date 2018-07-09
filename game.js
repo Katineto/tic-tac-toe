@@ -28,7 +28,7 @@ const playerBuilder = () => {
         return {
             name,
             id: lastId,
-            score,
+            score: () => score,
             addPoint: () => score += 1
         }
     }
@@ -37,8 +37,8 @@ export const createPlayer = playerBuilder()
 
 export const createGame = (p1, p2) => {
     const board = createBoard()
-    let winnerId = 0
     let currentPlayer = p1
+    let isDone = false
     const switchPlayer = () => {
         if(currentPlayer == p1) currentPlayer = p2
         else currentPlayer = p1
@@ -56,7 +56,6 @@ export const createGame = (p1, p2) => {
         if(playerMarks.length >= 3) {
             patterns.forEach(pattern => {
                 if(pattern.every(cell => playerMarks.indexOf(cell) != -1)) {
-                    console.log('value is true')
                     return hasWinningPattern = true
                 }
             })
@@ -64,8 +63,9 @@ export const createGame = (p1, p2) => {
         return hasWinningPattern
     }
     return {
+        isDone: () => isDone,
+        getCurrentPlayer: () => currentPlayer,
         getBoard: () => board.cells(),
-        getWinnerId: () => winnerId,
         turn: (position) => {
             if(board.isEmptyCell(position)) {
                 if(currentPlayer == p1) {
@@ -78,12 +78,9 @@ export const createGame = (p1, p2) => {
             else return
             
             if (checkWin()) {
-                if (currentPlayer == p1) {
-                    winnerId = 1
-                } else {
-                    winnerId = 2
-                }
-                console.log(`We have a winner: ${currentPlayer.name}`)
+                currentPlayer.addPoint()
+                isDone = true
+                console.log(`We have a winner: ${currentPlayer.name}, isDone: ${isDone}`)
                 return true
             } else {
                 switchPlayer()

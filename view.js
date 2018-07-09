@@ -14,11 +14,14 @@ export const renderBoard = (game) => {
         else if(cells[i] == 1) cell.innerText = 'X'
         else cell.innerText = 'O'
         boardDiv.appendChild(cell)
-        cell.addEventListener('click', () => {
-            game.turn(i)
-            renderBoard(game)
-        })
+        if(game.isDone() == false) {
+            cell.addEventListener('click', () => {
+                game.turn(i)
+                renderBoard(game)
+            })
+        }
     }
+    updateScore(game.getCurrentPlayer())
 }
 export const renderPlayers = (p1, p2) => {
     const p1Name = document.getElementById('p1-name')
@@ -27,6 +30,17 @@ export const renderPlayers = (p1, p2) => {
     const p2Score = document.getElementById('p2-score')
     p1Name.innerText = p1.name
     p2Name.innerText = p2.name
-    p1Score.innerText = p1.score
-    p2Score.innerText = p2.score
+    p1Score.innerText = p1.score()
+    p2Score.innerText = p2.score()
+}
+const updateScore = (winner) => {
+    console.log(winner.score())
+    if(winner.id == 1) {
+        const p1Score = document.getElementById('p1-score')
+        p1Score.innerText = winner.score()
+    }
+    if(winner.id ==2) {
+        const p2Score = document.getElementById('p2-score')
+        p2Score.innerText = winner.score()
+    }
 }
