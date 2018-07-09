@@ -1,11 +1,11 @@
-import { createBoard, createPlayer, createGame } from '../game';
+import { createBoard, createPlayer, createGame } from '../game.mjs';
 
-// describe('Create board', () => {
-//     it('creates an empty board', () => {
-//         const board = createBoard().cells()
-//         expect(board).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 0])
-//     })
-// })
+describe('Create board', () => {
+    it('creates an empty board', () => {
+        const board = createBoard().cells()
+        expect(board).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 0])
+    })
+})
 describe('Check win condition', () => {
     it('checks win condition', () => {
         const checkWinningPattern = (playerMarks) => {
