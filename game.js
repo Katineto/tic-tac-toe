@@ -55,9 +55,9 @@ export const createGame = (p1, p2) => {
         console.log(`player marks: ${playerMarks}`)
         if(playerMarks.length >= 3) {
             patterns.forEach(pattern => {
-                if(pattern.every(cell => playerMarks.indexOf(cell)) != -1) {
-                    hasWinningPattern = true
-                    console.log('checkWin changed hasWinningPattern to true')
+                if(pattern.every(cell => playerMarks.indexOf(cell) != -1)) {
+                    console.log('value is true')
+                    return hasWinningPattern = true
                 }
             })
         }
@@ -76,7 +76,7 @@ export const createGame = (p1, p2) => {
                 }
             }
             else return
-
+            
             if (checkWin()) {
                 if (currentPlayer == p1) {
                     winnerId = 1
