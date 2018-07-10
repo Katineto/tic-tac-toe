@@ -4,22 +4,33 @@
     <meta charset="UTF-8">
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet"> 
 </head>
 <body>
-    <div>
-        <input id="player1" type="text">
-        <input id="player2" type="text">
+    <div id="start-game">
+        <div class="wrapper-input">
+            <input id="player1" type="text" placeholder="Player 1">
+            <input id="player2" type="text" placeholder="Player 2">
+        </div>
         <button id="create-game-btn">Start new game</button>
+    </div>
+    <div class="wrapper-btn">
         <button id="restart">New round</button>
     </div>
     <div id="player-names">
-        <div id="p1-name">Player 1</div>
-        <div id="p1-score"></div>
-        <div id="p2-name">Player 2</div>
-        <div id="p2-score"></div>
+        <div class="wrapper-score">
+            <div id="p1-name">First player</div>
+            <div id="p1-score">0</div>
+        </div>
+        <div class="wrapper-score">
+            <div id="p2-name">Second player</div>
+            <div id="p2-score">0</div>
+        </div>
     </div>
+    <div id="turn"></div>
+    <div id="message" class="hidden"></div>
     <div id="board">
-
+        
     </div>
     
 </body>

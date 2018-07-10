@@ -8,11 +8,9 @@ export const createBoard = () => {
         cells: () => cells.slice(0),
         mark1: (position) => {
             cells[position] = 1
-            console.log(cells)
         },
         mark2: (position) => {
             cells[position] = 2
-            console.log(cells)
         },
         isEmptyCell: (position) => {
             return cells[position] == 0 ? true : false
@@ -52,7 +50,6 @@ export const createGame = (p1, p2) => {
                 playerMarks.push(i)
             } 
         }
-        console.log(`player marks: ${playerMarks}`)
         if(playerMarks.length >= 3) {
             patterns.forEach(pattern => {
                 if(pattern.every(cell => playerMarks.indexOf(cell) != -1)) {
@@ -62,8 +59,13 @@ export const createGame = (p1, p2) => {
         }
         return hasWinningPattern
     }
+    const isDraw = () => {
+        const currentBoard = board.cells()
+        return currentBoard.indexOf(0) == -1
+    }
     return {
         isDone: () => isDone,
+        isDraw,
         getCurrentPlayer: () => currentPlayer,
         getBoard: () => board.cells(),
         turn: (position) => {
@@ -80,9 +82,11 @@ export const createGame = (p1, p2) => {
             if (checkWin()) {
                 currentPlayer.addPoint()
                 isDone = true
-                console.log(`We have a winner: ${currentPlayer.name}, isDone: ${isDone}`)
                 return true
-            } else {
+            } else if(isDraw()) {
+                return true
+            }
+            else {
                 switchPlayer()
                 return false
             }
