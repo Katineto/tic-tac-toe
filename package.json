@@ -4,7 +4,8 @@
   "description": "",
   "main": "game.js",
   "scripts": {
-    "test": "ava"
+    "test": "ava",
+    "build": "bash ./pages.sh"
   },
   "repository": {
     "type": "git",
